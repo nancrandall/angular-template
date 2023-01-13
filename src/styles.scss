@@ -1,0 +1,225 @@
+// styleguide dependencies
+@import "~styleguide/modern-webpack";
+
+// project
+.container {
+  color: color("inky-blue");
+}
+
+// variables
+$micro-spacing: 5px;
+$table-padding--xl-large: $extra-tiny-spacing $medium-spacing $extra-tiny-spacing 0;
+$table-padding--large: $extra-tiny-spacing $medium-spacing $extra-tiny-spacing $micro-spacing;
+$table-padding--small: $extra-tiny-spacing 0 $tiny-spacing;
+$border--thick: 3px solid color("graphite");
+$border--thin: 1px solid color("graphite");
+$table-label-font-size: $tiny-font-size;
+
+// mixins
+@mixin table-arrow-styles {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 0 0 2px $extra-tiny-spacing;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid;
+  border-bottom-color: color('dolphin');
+}
+
+@mixin children--padding {
+  &:first-child {
+    padding-left: $micro-spacing;
+  }
+  &:last-child {
+    padding-right: $micro-spacing;
+  }
+}
+
+@mixin table {
+  width: 100%;
+  text-align: left;
+  thead {
+    border-bottom: $border--thick;
+    @include media($device) {
+      border-bottom: $border--thin;
+    }
+  }
+  tr {
+    border-bottom: $border--thin;
+    &:last-child {
+      border-bottom: $border--thick;
+    }
+    @include media($device) {
+      border-top: $border--thin;
+      border-bottom: $border--thin;
+    }
+  }
+  th {
+    text-transform: uppercase;
+    color: $text-light;
+    font-size: $table-label-font-size;
+    padding: $table-padding--xl-large;
+    cursor: pointer;
+
+    &.number {
+      text-align: right;
+    }
+    @include children--padding;
+    @include media($device) {
+      display: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @include media($mobile) {
+      background-color: black;
+      &.number {
+        text-align: left;
+      }
+    }
+  }
+  td {
+    display: table-cell;
+    padding: $table-padding--xl-large;
+    vertical-align: top;
+    &.number {
+      text-align: right;
+    }
+    @include children--padding;
+    @include media($device) {
+      display: block;
+      padding: $table-padding--small;
+      &:last-child {
+        padding-bottom: $small-spacing;
+      }
+      &.number {
+        text-align: left;
+      }
+    }
+    @include media($device) {
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+      padding-bottom: $extra-tiny-spacing;
+    }
+    &:before {
+      display: none;
+      @include media($device) {
+        content: attr(data-th)" ";
+        color: $text-light;
+        text-transform: uppercase;
+        font-size: $table-label-font-size;
+        width: 100%;
+        display: block;
+        padding-bottom: $tiny-spacing;
+      }
+    }
+  }
+  p {
+    margin: 0;
+  }
+  .sortable {
+  &.active {
+    font-family: $medium-font-family;
+    color: color('inky-blue');
+    &::after {
+      border-bottom-color: color('interactive-blue');
+    }
+  }
+}
+
+.arrows-table {
+  @include table-arrow-styles;
+  border-top: 5px solid;
+  border-top-color: color('dolphin');
+  border-bottom: 0;
+  &-up {
+    @include table-arrow-styles;
+  }
+  &-down {
+    @include table-arrow-styles border-top: 5px solid;
+    border-top-color: color('dolphin');
+    border-bottom: 0;
+  }
+}
+
+.hidden-row {
+  display: none;
+}
+
+.mobile-sort {
+  display: none;
+  @include media($device) {
+    display: block;
+  }
+  .select-dropdown{
+    color: $link-color;
+    max-width: 200px;
+    min-width: auto;
+  }
+}
+
+.mobile_padding {
+  padding: $extra-tiny-spacing;
+}
+
+.th-body:focus {
+  border: 0;
+}
+.th-body-heading-focus {
+  &:focus {   
+    outline: 0;
+  }
+}
+
+.th-body {
+  display: block;
+  width: 100%;
+}
+&--large {
+  td,
+  th {
+    padding: $table-padding--large;
+    @include media($device) {
+      padding: $table-padding--small;
+      &:last-child {
+        padding-bottom: $small-spacing;
+      }
+    }
+  }
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  &--mobile-only {
+    @include media($device) {
+      display: none;
+    }
+  }
+}
+}
+
+// classes
+.data-table {
+  @include table;
+
+}
+.data-table--large {
+  @include table;
+}
+.data-table--grey-even-row {
+  @include table;
+  tr:nth-of-type(even) {
+    background: color("graphite-light");
+  }
+}

@@ -1,0 +1,5 @@
+<span class="th-body" role="button" [ngClass]="[sortDirection === 'ascending' ? '--medium': '']">
+    <ng-content></ng-content>
+    <i class="arrows-table-up" *ngIf="sortDirection === 'ascending'" ></i>
+    <i class="arrows-table-down" *ngIf="sortDirection === 'descending' || sortDirection === ''" ></i>
+</span>

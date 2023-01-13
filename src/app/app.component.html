@@ -1,0 +1,49 @@
+<div class="container">
+
+  <h1 class="styling-3">Pattern Angular Template</h1>
+  <p class="styling-8 -dolphin -light">
+    Angular: v4.4.7<br>
+    Angular CLI: v1.7.4</p>
+  <br>
+
+  <h2 class="styling-4">Sortable Table</h2>
+  
+  <!-- sortable table -->
+  <div class="select-dropdown mobile-sort">
+    <div class="dropdown-overlay">
+      <span class="value__selected">{{selectedValue}}</span>
+      <i class="icon-chevron-down"></i>
+    </div>
+    <label class="label__select-form--hidden" for="select-dropdown">Select option to sort table</label>
+    <select class="select-menu" id="dropdown" (change)="onChange($event)">
+      <option value="default">Sort Table By</option>
+      <option value="name">Name</option>
+      <option value="salary">Salary($)</option>
+      <option value="extension">Extension</option>
+      <option value="date">Start Date</option>
+    </select>
+  </div>
+  <table sortable-table (sorted)="onSorted($event)" aria-readonly="true" class="data-table" role="grid">
+    <caption class="styling-5 --dolphin --light visuallyhidden--mobile-only" id="employee-caption">
+      Employee Table<span class="visuallyhidden" id="captionUpdated"></span>
+    </caption>
+    <thead>
+      <tr role="row">
+        <th scope="col" sortable-column="name" role="columnheader" [attr.aria-sort]="sortDirection">Name</th>
+        <th scope="col" sortable-column="salary" role="columnheader" [attr.aria-sort]="sortDirection">Salary($)</th>
+        <th scope="col" sortable-column="extension" role="columnheader" [attr.aria-sort]="sortDirection">Extension</th>
+        <th scope="col" sortable-column="date" role="columnheader" [attr.aria-sort]="sortDirection">Start Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of Employees" class="sort-row" role="row">
+        <td data-th="Name" role="gridcell">{{employee.name}}</td>
+        <td data-th="Salary" role="gridcell">{{employee.salary}}</td>
+        <td data-th="Extension" role="gridcell">{{employee.extension}}</td>
+        <td data-th="Start Date" role="gridcell">{{employee.date}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- /sortable table -->
+
+</div>
